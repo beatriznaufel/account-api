@@ -3,6 +3,7 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { z } from 'zod';
 import { users } from './db/schema';
+import * as bcrypt from 'bcrypt';
 
 const app = new Hono();
 
@@ -24,12 +25,19 @@ app.post('/register', async (c) => {
     const body = await c.req.json();
     const validated = userSchema.parse(body);
     
+    const hashedPassword = await bcrypt.hash(validated.password, 10);
+    
     const newUser = await db.insert(users).values({
       email: validated.email,
-      password: validated.password,
+      password: hashedPassword,
     }).returning();
 
-    return c.json({ success: true, user: newUser[0] });
+    const { password, ...userWithoutPassword } = newUser[0];
+    
+    return c.json({ 
+      success: true, 
+      user: userWithoutPassword 
+    });
   } catch (error) {
     if (error instanceof Error) {
       return c.json({ success: false, error: error.message }, 400);
