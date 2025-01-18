@@ -9,7 +9,7 @@ if (!process.env.DATABASE_URL) {
 
 const migrationClient = postgres(process.env.DATABASE_URL, { max: 1 })
 
-async function main() {
+async function main(): Promise<void> {
   try {
     const db = drizzle(migrationClient)
     await migrate(db, { migrationsFolder: 'drizzle' })

@@ -4,8 +4,8 @@ export default antfu({
   type: 'lib',
 
   stylistic: {
-    indent: 2, 
-    quotes: 'single', 
+    indent: 2,
+    quotes: 'single',
   },
 
   typescript: true,
@@ -15,5 +15,5 @@ export default antfu({
   yaml: false,
   ignores: [
     '**/fixtures',
-  ]
+  ],
 })

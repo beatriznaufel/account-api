@@ -28,10 +28,13 @@ app.post('/register', async (c) => {
 
     const hashedPassword = await bcrypt.hash(validated.password, 10)
 
-    const newUser = await db.insert(users).values({
-      email: validated.email,
-      password: hashedPassword,
-    }).returning()
+    const newUser = await db
+      .insert(users)
+      .values({
+        email: validated.email,
+        password: hashedPassword,
+      })
+      .returning()
 
     const { password, ...userWithoutPassword } = newUser[0]
 
