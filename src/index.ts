@@ -2,11 +2,21 @@ import process from 'node:process'
 import * as bcrypt from 'bcrypt'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import postgres from 'postgres'
 import { z } from 'zod'
 import { users } from './db/schema'
 
 const app = new Hono()
+
+app.use(
+  '/*',
+  cors({
+    origin: '*',
+    allowMethods: ['POST', 'GET', 'OPTIONS'],
+    allowHeaders: ['Content-Type'],
+  }),
+)
 
 if (!process.env.DATABASE_URL) {
   throw new Error('DATABASE_URL is not defined')

@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "generate": "drizzle-kit generate:pg",
     "migrate": "bun migrate.ts",
-    "prepare": "husky install" 
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -35,6 +35,7 @@
     "drizzle-kit": "^0.30.1",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
+    "jiti": "^2.4.2",
     "tsx": "^4.19.2"
   }
 }

@@ -13,7 +13,5 @@ export default antfu({
 
   jsonc: false,
   yaml: false,
-  ignores: [
-    '**/fixtures',
-  ],
+  ignores: ['**/fixtures'],
 })
