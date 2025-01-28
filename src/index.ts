@@ -27,7 +27,6 @@ const connectionString = process.env.DATABASE_URL;
 const client = postgres(connectionString);
 const db = drizzle(client);
 
-// Schemas
 const userSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -38,20 +37,17 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
-// Endpoint de login
 app.post("/login", async (c) => {
   try {
     const body = await c.req.json();
     const validated = loginSchema.parse(body);
 
-    // Buscar usuário pelo email
     const user = await db
       .select()
       .from(users)
       .where(eq(users.email, validated.email))
       .limit(1);
 
-    // Se não encontrar o usuário
     if (user.length === 0) {
       return c.json(
         {
@@ -62,7 +58,6 @@ app.post("/login", async (c) => {
       );
     }
 
-    // Verificar a senha
     const isPasswordValid = await bcrypt.compare(
       validated.password,
       user[0].password,
@@ -78,7 +73,6 @@ app.post("/login", async (c) => {
       );
     }
 
-    // Se tudo estiver ok, retorna o usuário (sem a senha)
     const { password, ...userWithoutPassword } = user[0];
 
     return c.json({
@@ -114,7 +108,6 @@ app.post("/register", async (c) => {
     const body = await c.req.json();
     const validated = userSchema.parse(body);
 
-    // Primeiro, verificar se o email já existe
     const existingUser = await db
       .select()
       .from(users)
