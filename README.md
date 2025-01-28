@@ -98,18 +98,6 @@ PORT=3000
 - ESLint code quality checks
 - Husky pre-commit hooks
 
-## 👥 Contributing
-
-1. Fork the project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## ✨ Author
 
 Maria Beatriz - [GitHub](https://github.com/beatriznaufel)
